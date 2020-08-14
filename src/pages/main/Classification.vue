@@ -198,7 +198,6 @@ export default {
       this.allName = true;
 modifyList().then(res=>{
   this.arr=res.data.categories
-  console.log(this.arr);
 })
     },
     load() {

@@ -73,5 +73,9 @@ export var changeshop=(obj)=>axios.post('/shop/edit',obj)
 export var index_list=()=>axios.get('/order/totaldata')
 //订单报表
 export var rpt=(date)=>axios.get('/order/ordertotal',{params:{date}})
+
+
+
+export var menuList=(currentPage,pageSize)=>axios.get('/goods/list',{params:{currentPage,pageSize}})
 // export xxx       //多次暴露                 接： import {name ,login } from 'xxx'
 // export default   //默认暴露，只能暴露一次   接: import xxx from 'xxx'

@@ -17,7 +17,7 @@
     </p>
     <p>
       <span class="left">商品价格</span>
-      <el-input-number v-model="num" @change="handleChange" :min="min" :max="max" label="描述文字"></el-input-number>
+      <el-input-number v-model="num" :min="min" :max="max" label="描述文字"></el-input-number>
     </p>
     <p>
       <span class="left">商品图片</span>
@@ -29,8 +29,8 @@
       >
         <i class="el-icon-plus"></i>
       </el-upload>
-      <el-dialog :visible.sync="dialogVisible">
-        <img width="100%" :src="dialogImageUrl" alt />
+      <el-dialog  >
+        <img width="100%" alt />
       </el-dialog>
     </p>
     <p>

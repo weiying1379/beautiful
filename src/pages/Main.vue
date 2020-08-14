@@ -3,6 +3,11 @@
     <el-aside width="200px">
       <el-row class="tac">
         <el-col :span="24">
+          <div>
+
+      <img  style="width:200px; height:120px" src="http://127.0.0.1:5000/upload/imgs/acc_img/logo.png" alt="">
+          </div>
+          
           <el-menu
             :default-active="cur"
             class="el-menu-vertical-demo"
@@ -12,6 +17,7 @@
             unique-opened
             router
           >
+
             <div v-for="item in powerarr" :key="item.url">
               <el-menu-item v-if="!item.children" :index="item.url">
                 <i :class="item.icon"></i>
@@ -38,11 +44,11 @@
       <el-header>
         <div class="left">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item v-for="item in arr" :key="item">{{item}}</el-breadcrumb-item>
+            <el-breadcrumb-item v-for="item in arr" :key="item"><a href="#">{{item}}</a></el-breadcrumb-item>
           </el-breadcrumb>
         </div>
         <div class="right">
-          <span>欢迎你,{{username}}</span>
+          <span>欢迎你! <label>{{username}}</label> </span>
           <el-row class="demo-avatar demo-basic">
             <el-col>
               <div @click="head" class="demo-basic--circle">
@@ -248,7 +254,7 @@ export default {
   flex: 1;
   overflow-y: scroll;
   padding: 0;
-  background: #f0f2f5;
+  background: #c8f1bd;
 }
 .el-aside {
   background: #66cccc;
@@ -265,7 +271,7 @@ export default {
   flex: 1;
   display: flex;
   .el-header {
-    background: #ccff99;
+    background: #66cccc;
   }
 }
 //top
@@ -278,11 +284,19 @@ export default {
     display: flex;
     align-items: center;
     span {
+      color: #fff;
       margin-right: 5px;
+      label{
+color: red;
+      }
     }
   }
 }
 .el-breadcrumb__item {
   font-size: 16px;
+}
+ .el-breadcrumb__inner a{
+  font-size: 18px;
+  color:#fff !important;
 }
 </style>

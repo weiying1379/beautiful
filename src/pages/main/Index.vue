@@ -8,7 +8,7 @@
 
         <div>
           <span>总订单</span>
-          <p>102400</p>
+          <p>{{all}}</p>
         </div>
       </li>
       <li>
@@ -17,7 +17,7 @@
         </p>
         <div>
           <span>总销售额</span>
-          <p>102400</p>
+          <p>{{allgo}}</p>
         </div>
       </li>
       <li>
@@ -26,7 +26,7 @@
         </p>
         <div>
           <span>今日订单数</span>
-          <p>102400</p>
+          <p>{{now}}</p>
         </div>
       </li>
       <li>
@@ -35,7 +35,7 @@
         </p>
         <div>
           <span>今日销售额</span>
-          <p>102400</p>
+          <p>{{nowtime}}</p>
         </div>
       </li>
     </ul>
@@ -50,6 +50,14 @@ import { index_list } from "@/api/apis";
 import echarts from "echarts";
 
 export default {
+  data() {
+    return {
+      all: "",
+      allgo: "",
+      now: "",
+      nowtime: "",
+    };
+  },
   mounted() {
     let mcharts = echarts.init(document.querySelector("#firstecharts"));
 
@@ -57,7 +65,10 @@ export default {
       //   res.data.xData; //x坐标的标题
       //   res.data.amountData; //金额数据
       //   res.data.orderData; //订单数据
-
+      this.all = res.data.todayOrder;
+      this.allgo = res.data.totalAmount;
+      this.now = res.data.totalOrder;
+      this.nowtime = res.data.totayAmount;
       // 2. 创建配置对象
       let option = {
         title: {

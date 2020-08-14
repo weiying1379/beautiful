@@ -29,7 +29,11 @@
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
           >
-            <img v-show="!row_info.imgUrl==''" :src="find_img+row_info.imgUrl" class="avatar" />
+            <img
+              v-show="!row_info.imgUrl==''"
+              :src="row_info?'':find_img+row_info.imgUrl"
+              class="avatar"
+            />
             <i v-show="row_info.imgUrl==''" class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </p>
@@ -70,7 +74,7 @@
               <span>{{ props.row.price }}</span>
             </el-form-item>
             <el-form-item label="商品图片">
-              <img :src="find_img+props.row.imgUrl" alt />
+              <img :src="!props.row.imgUrl?'':find_img+props.row.imgUrl" alt />
             </el-form-item>
             <el-form-item label="创建时间">
               <span>{{ props.row.ctime }}</span>
@@ -94,7 +98,7 @@
       <el-table-column label="商品价格" prop="price"></el-table-column>
       <el-table-column label="商品图片">
         <template scope="scope">
-          <img :src="find_img+scope.row.imgUrl" alt />
+          <img :src="!scope.row.imgUrl?'':find_img+scope.row.imgUrl" alt />
         </template>
       </el-table-column>
       <el-table-column label="商品描述" prop="goodsDesc"></el-table-column>
@@ -128,6 +132,7 @@ import {
   item_img,
   find_img,
 } from "@/api/apis";
+import { getDate } from "@/utils/utils";
 export default {
   data() {
     return {
@@ -147,6 +152,7 @@ export default {
       find_img: "",
       row_info: {},
       row_category: "",
+      
     };
   },
   methods: {
@@ -164,7 +170,11 @@ export default {
       //渲染
       menuList(this.currentPage, this.pageSize).then((res) => {
         let arr = res.data.data;
+        for (const key of arr) {
+          key.ctime=getDate(key.ctime)
+        }
         this.tableData = arr;
+        
         this.total = res.data.total;
       });
     },
@@ -185,8 +195,15 @@ export default {
     },
     confirms() {
       //修改模态框确认
-      this.row_info.category=this.row_category
-      edtMenu(this.row_info.name,this.row_info.category,this.row_info.price,this.row_info.imgUrl,this.row_info.goodsDesc,this.row_info.id).then((res) => {
+      this.row_info.category = this.row_category;
+      edtMenu(
+        this.row_info.name,
+        this.row_info.category,
+        this.row_info.price,
+        this.row_info.imgUrl,
+        this.row_info.goodsDesc,
+        this.row_info.id
+      ).then((res) => {
         if (res.data.code == 0) {
           this.shows = false;
           this.load();
